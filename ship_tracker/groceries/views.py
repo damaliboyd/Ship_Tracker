@@ -1,25 +1,21 @@
-from django.shortcuts import render
 from .models import Grocery
+from .forms import GroceryCreateForm
+from django.views.generic import CreateView, DetailView, ListView, TemplateView
+from django.shortcuts import render, redirect, get_object_or_404
+
 # Create your views here.
 
+class GroceryCreateView(CreateView):
+    model = Grocery
+    fields = ['item', 'category', 'have']
 
 
-def post_new(request):
-    if request.method == "POST":
-        form = GorceryForm(request.POST)
-        if form.is_valid():
-            post = form.save(commit=False)
-            post.author = request.user
-            post.save()
-            return redirect('grocery_detail', pk=post.pk)
-    else:
-        form = GorceryForm()
-    return render(request, 'blog/post_edit.html', {'form': form})
-    
-def grocery_list(request):
-    post = Grocery.objects.all()
-    return render(request, 'grocery/grocery_list.html', {'posts': posts})
+class GroceryDetailView(DetailView):
+    model = Grocery
 
-def grocery_detail(request, pk):
-    post = get_object_or_404(Grocery, pk=pk)
-    return render(request, 'blog/grocery_detail.html', {'post': post})
+
+class GroceryListView(ListView):
+    model = Grocery
+
+class GroceryTemplateView(TemplateView):
+    template_name= "base.html"  

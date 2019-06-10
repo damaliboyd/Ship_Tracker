@@ -27,6 +27,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'groceries',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -110,3 +112,4 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
